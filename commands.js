@@ -1,5 +1,5 @@
-var fs = require('fs');
-var readline = require('readline');
+const fs = require('fs');
+const readline = require('readline');
 
 module.exports = {
   pwd: function() {
