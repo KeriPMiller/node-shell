@@ -1,13 +1,12 @@
 var fs = require('fs');
+var readline = require('readline');
 
 module.exports = {
   pwd: function() {
     process.stdout.write(process.mainModule.filename)
-    process.stdout.write('\nprompt > ')
   },
   date: function() {
     process.stdout.write(Date())
-    process.stdout.write('\nprompt > ')
   },
   ls: function() {
     fs.readdir('.', function(err, files) {
@@ -17,7 +16,32 @@ module.exports = {
       files.forEach(function(file) {
         process.stdout.write(file.toString() + "\n")
       })
-      process.stdout.write('prompt > ');
     })
-  }
+  },
+  echo: function(data){
+    process.stdout.write(data)
+  },
+  cat: function(filename){
+    fs.readFile(filename, function(err, files) {
+      if (err) {
+        throw err;
+      }
+      console.log(data);
+  })},
+  head: function(filename){
+    const rl = readline.createInterface({
+      input: fs.createReadStream(filename)
+    });
+    var counter = 0;
+
+    while(counter < 5){
+      rl.on('line', (line) =>{
+              console.log(`${line}`);
+              counter++;
+      })
+    }
+}
+  // tail: function(filename){
+
+  // }
 }
